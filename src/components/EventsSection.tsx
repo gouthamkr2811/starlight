@@ -59,6 +59,7 @@ export default function EventsSection() {
     const cardsRef = useRef<HTMLDivElement[]>([]);
 
     useEffect(() => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         let ctx: any;
         const initGSAP = async () => {
             const gsap = (await import("gsap")).default;

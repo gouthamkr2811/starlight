@@ -30,6 +30,7 @@ export default function QuotesSection() {
     const quotesRef = useRef<HTMLDivElement[]>([]);
 
     useEffect(() => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         let ctx: any;
         const initGSAP = async () => {
             const gsap = (await import("gsap")).default;
@@ -94,7 +95,7 @@ export default function QuotesSection() {
                             style={{ opacity: 0 }}
                         >
                             <span className="text-gold/30 font-serif text-6xl leading-none -mb-4">
-                                "
+                                &ldquo;
                             </span>
                             <p className="font-serif text-xl md:text-2xl text-white/80 italic leading-relaxed max-w-2xl">
                                 {q.text}

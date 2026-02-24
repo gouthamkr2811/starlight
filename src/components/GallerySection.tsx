@@ -25,7 +25,7 @@ const galleryImages = [
 
 export default function GallerySection() {
     const sectionRef = useRef<HTMLElement>(null);
-    const itemsRef = useRef<HTMLDivElement[]>([]);
+    const desktopItemsRef = useRef<HTMLDivElement[]>([]);
 
     useEffect(() => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -36,11 +36,11 @@ export default function GallerySection() {
             gsap.registerPlugin(ScrollTrigger);
 
             ctx = gsap.context(() => {
-                itemsRef.current.forEach((el, i) => {
+                desktopItemsRef.current.forEach((el, i) => {
                     if (!el) return;
                     gsap.fromTo(
                         el,
-                        { opacity: 0, scale: 0.9 },
+                        { opacity: 0, scale: 0.95 },
                         {
                             opacity: 1,
                             scale: 1,
@@ -49,7 +49,7 @@ export default function GallerySection() {
                             delay: (i % 3) * 0.1,
                             scrollTrigger: {
                                 trigger: el,
-                                start: "top 90%",
+                                start: "top 92%",
                                 toggleActions: "play none none none",
                             },
                         }
@@ -70,7 +70,7 @@ export default function GallerySection() {
         >
             <div className="max-w-7xl mx-auto">
                 {/* Header */}
-                <div className="text-center mb-16">
+                <div className="text-center mb-12 md:mb-16">
                     <p className="text-gold text-xs uppercase tracking-[0.4em] mb-3">
                         Our Portfolio
                     </p>
@@ -79,13 +79,32 @@ export default function GallerySection() {
                     </h2>
                 </div>
 
-                {/* Masonry-style grid */}
-                <div className="grid grid-cols-2 md:grid-cols-3 auto-rows-[220px] gap-3 md:gap-4">
+                {/* Mobile: 2-col uniform square grid — no GSAP, always visible */}
+                <div className="grid grid-cols-2 gap-2 md:hidden">
+                    {galleryImages.map((img, i) => (
+                        <div
+                            key={i}
+                            className="relative overflow-hidden aspect-square"
+                        >
+                            <Image
+                                src={encode(img.file)}
+                                alt={img.alt}
+                                fill
+                                className="object-cover object-center"
+                                sizes="50vw"
+                            />
+                            <div className="absolute inset-0 bg-dark/20" />
+                        </div>
+                    ))}
+                </div>
+
+                {/* Desktop: masonry-style grid with row-span + GSAP */}
+                <div className="hidden md:grid md:grid-cols-3 auto-rows-[220px] gap-4">
                     {galleryImages.map((img, i) => (
                         <div
                             key={i}
                             ref={(el) => {
-                                if (el) itemsRef.current[i] = el;
+                                if (el) desktopItemsRef.current[i] = el;
                             }}
                             className={`relative overflow-hidden group cursor-pointer ${img.span}`}
                             style={{ opacity: 0 }}
@@ -95,10 +114,10 @@ export default function GallerySection() {
                                 alt={img.alt}
                                 fill
                                 className="object-cover object-center group-hover:scale-110 transition-transform duration-700 ease-out"
-                                sizes="(max-width: 768px) 50vw, 33vw"
+                                sizes="33vw"
                             />
                             {/* Hover overlay */}
-                            <div className="absolute inset-0 bg-dark/50 opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex items-center justify-center">
+                            <div className="absolute inset-0 bg-dark/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                                 <span className="text-gold border border-gold px-4 py-2 text-xs uppercase tracking-widest transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                                     View
                                 </span>

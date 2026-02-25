@@ -68,6 +68,9 @@ export default function Footer() {
                         <p className="text-white/30 text-sm mt-1 tracking-wider">
                             Crafting Unforgettable Moments
                         </p>
+                        <p className="text-white/20 text-xs mt-2 tracking-wide">
+                            Nadathara, Mannuthy, Thrissur, Kerala
+                        </p>
                     </div>
 
                     {/* Nav links */}

@@ -62,6 +62,7 @@ export default function GalleryPage() {
                                 src={encode(img.file)}
                                 alt={img.alt}
                                 fill
+                                quality={90}
                                 className="object-cover object-center group-hover:scale-110 transition-transform duration-700 ease-out"
                                 sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                             />

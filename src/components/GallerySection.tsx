@@ -72,8 +72,9 @@ export default function GallerySection() {
                                 src={encode(img.file)}
                                 alt={img.alt}
                                 fill
+                                quality={90}
                                 className="object-cover object-center"
-                                sizes="50vw"
+                                sizes="(max-width: 768px) 50vw, 33vw"
                             />
                             <div className="absolute inset-0 bg-dark/20" />
                         </div>

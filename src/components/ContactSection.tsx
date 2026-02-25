@@ -41,7 +41,7 @@ export default function ContactSection() {
                                 {
                                     icon: "⌖",
                                     label: "Location",
-                                    value: "Nadathara, Mannuthy, Kerala",
+                                    value: "Nadathara, Mannuthy, Thrissur, Kerala",
                                 },
                             ].map((item) => (
                                 <div key={item.label} className="flex items-center gap-4">

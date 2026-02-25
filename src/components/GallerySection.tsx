@@ -2,26 +2,8 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
-
-// Using your local event images from public/images/event
-// Files with spaces/parentheses must be URL-encoded for Next.js <Image>
-const encode = (name: string) =>
-    `/images/event/${encodeURIComponent(name)}`;
-
-const galleryImages = [
-    { file: "WhatsApp Image 2026-02-22 at 19.27.35.jpeg", span: "row-span-2", alt: "Event highlight" },
-    { file: "WhatsApp Image 2026-02-22 at 19.27.39.jpeg", span: "", alt: "Event decoration" },
-    { file: "WhatsApp Image 2026-02-22 at 19.27.40.jpeg", span: "", alt: "Celebration setup" },
-    { file: "WhatsApp Image 2026-02-22 at 19.27.41.jpeg", span: "row-span-2", alt: "Grand event" },
-    { file: "WhatsApp Image 2026-02-22 at 19.27.42.jpeg", span: "", alt: "Luxury moment" },
-    { file: "WhatsApp Image 2026-02-22 at 19.27.43.jpeg", span: "", alt: "Event styling" },
-    { file: "WhatsApp Image 2026-02-22 at 19.27.44.jpeg", span: "row-span-2", alt: "Premium event" },
-    { file: "WhatsApp Image 2026-02-22 at 19.27.46.jpeg", span: "", alt: "Floral decor" },
-    { file: "WhatsApp Image 2026-02-22 at 19.27.47.jpeg", span: "", alt: "Night celebration" },
-    { file: "WhatsApp Image 2026-02-22 at 19.27.48.jpeg", span: "", alt: "Table setting" },
-    { file: "WhatsApp Image 2026-02-22 at 19.27.50.jpeg", span: "", alt: "Event ambiance" },
-    { file: "WhatsApp Image 2026-02-22 at 19.27.51.jpeg", span: "", alt: "Special occasion" },
-];
+import Link from "next/link";
+import { homepageImages, encode } from "@/lib/galleryImages";
 
 export default function GallerySection() {
     const sectionRef = useRef<HTMLElement>(null);
@@ -81,7 +63,7 @@ export default function GallerySection() {
 
                 {/* Mobile: 2-col uniform square grid — no GSAP, always visible */}
                 <div className="grid grid-cols-2 gap-2 md:hidden">
-                    {galleryImages.map((img, i) => (
+                    {homepageImages.map((img, i) => (
                         <div
                             key={i}
                             className="relative overflow-hidden aspect-square"
@@ -100,13 +82,13 @@ export default function GallerySection() {
 
                 {/* Desktop: masonry-style grid with row-span + GSAP */}
                 <div className="hidden md:grid md:grid-cols-3 auto-rows-[220px] gap-4">
-                    {galleryImages.map((img, i) => (
+                    {homepageImages.map((img, i) => (
                         <div
                             key={i}
                             ref={(el) => {
                                 if (el) desktopItemsRef.current[i] = el;
                             }}
-                            className={`relative overflow-hidden group cursor-pointer ${img.span}`}
+                            className={`relative overflow-hidden group cursor-pointer ${img.span ?? ""}`}
                             style={{ opacity: 0 }}
                         >
                             <Image
@@ -124,6 +106,17 @@ export default function GallerySection() {
                             </div>
                         </div>
                     ))}
+                </div>
+
+                {/* View More Button */}
+                <div className="text-center mt-12">
+                    <Link
+                        href="/gallery"
+                        className="inline-flex items-center gap-3 px-10 py-4 border border-gold text-gold uppercase tracking-widest text-sm hover:bg-gold hover:text-dark transition-all duration-500 group"
+                    >
+                        View Full Gallery
+                        <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
+                    </Link>
                 </div>
             </div>
         </section>
